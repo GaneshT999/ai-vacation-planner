@@ -66,7 +66,14 @@ module.exports = async function handler(req, res) {
     // Verify token by checking with Firebase REST API
     let verifiedUid;
     try {
-      const verifyUrl = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.FIREBASE_API_KEY || 'AIzaSyA51aalnhCOf8F6p_-YzQlGvBSY7Jfcep0'}`;
+      if (!process.env.FIREBASE_API_KEY) {
+        console.error('FIREBASE_API_KEY environment variable not configured');
+        return res.status(500).json({
+          error: 'Server configuration error. Please contact support.',
+        });
+      }
+
+      const verifyUrl = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.FIREBASE_API_KEY}`;
       const verifyResponse = await fetch(verifyUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
