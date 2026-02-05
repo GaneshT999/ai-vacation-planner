@@ -142,7 +142,7 @@ export class TripPlannerComponent implements OnInit {
   async signOut() {
     try {
       await this.authService.signOut();
-      await this.router.navigate(['/login']);
+      await this.router.navigate(['/']);
     } catch (error) {
       console.error('Error signing out:', error);
     }
