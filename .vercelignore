@@ -1,0 +1,3 @@
+node_modules.angular;
+dist.env * functions.firebase.firebaserc;
+firebase - debug.log;
